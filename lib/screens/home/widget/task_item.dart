@@ -25,7 +25,7 @@ class CustomTaskItem extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          task.title,
+          task.title ?? '',
           textAlign: TextAlign.center,
         ),
       ),

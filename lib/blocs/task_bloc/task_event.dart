@@ -1,10 +1,17 @@
-abstract class TaskEvent{}
+import 'package:equatable/equatable.dart';
 
-class AddTaskEvent extends TaskEvent{}
+abstract class TaskEvent extends Equatable {
+  const TaskEvent()
 
-class UpdateTaskEvent extends TaskEvent{}
+  @override
+  List<Object> get props => [];
+}
 
-class DeleteTaskEvent extends TaskEvent{
+class AddTaskEvent extends TaskEvent {}
+
+class UpdateTaskEvent extends TaskEvent {}
+
+class DeleteTaskEvent extends TaskEvent {
   final int id;
   DeleteTaskEvent({required this.id});
 }
