@@ -1,6 +1,7 @@
-# flutter_application_1
+# flutter_ToDoApp
 
-A new Flutter project.
+A TodoApp Flutter project.
+Using Bloc to State Management
 
 ## Getting Started
 
