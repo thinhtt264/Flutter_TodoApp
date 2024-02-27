@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class Task extends Equatable {
-  final int? id;
+  final int id;
   final String? title;
   final String? description;
   final bool? isCompleted;
@@ -9,7 +9,7 @@ class Task extends Equatable {
   final String? time;
 
   const Task(
-      {this.id,
+      {required this.id,
       this.title,
       this.description,
       this.isCompleted,
@@ -20,13 +20,25 @@ class Task extends Equatable {
     return <String, dynamic>{
       'id': id,
       'title': title,
+      'description': description,
       'time': time,
       'date': date,
       'isCompleted': isCompleted ?? false,
     };
   }
 
-Task copyWith({
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'time': time,
+      'date': date,
+      'isCompleted': isCompleted == true ? 1 : 0,
+    };
+  }
+
+  Task copyWith({
     int? id,
     String? title,
     String? description,

@@ -1,7 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter_application_1/blocs/task_bloc/task_bloc.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
+part of 'task_bloc.dart';
 class TaskProvider extends StatelessWidget {
   final Widget child;
 
@@ -9,7 +6,8 @@ class TaskProvider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (BuildContext context) => TaskBloc(), child: child);
+    return BlocProvider<TaskBloc>(
+        create: (BuildContext context) => TaskBloc()..add(GetAllTasksEvent()),
+        child: child);
   }
 }

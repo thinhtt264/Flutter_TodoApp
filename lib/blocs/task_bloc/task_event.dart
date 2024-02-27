@@ -1,17 +1,31 @@
-import 'package:equatable/equatable.dart';
+part of 'task_bloc.dart';
 
-abstract class TaskEvent extends Equatable {
-  const TaskEvent()
-
+@immutable
+abstract class TaskEvent {
+  const TaskEvent();
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
-class AddTaskEvent extends TaskEvent {}
+class GetAllTasksEvent extends TaskEvent {}
 
-class UpdateTaskEvent extends TaskEvent {}
+class AddTaskEvent extends TaskEvent {
+  final Task task;
+  const AddTaskEvent({required this.task});
+}
+
+class UpdateTaskEvent extends TaskEvent {
+  final Task task;
+  const UpdateTaskEvent({required this.task});
+}
+
+class CompleteTaskEvent extends TaskEvent {
+  final bool isCompleted;
+  final int id;
+  const CompleteTaskEvent({required this.isCompleted, required this.id});
+}
 
 class DeleteTaskEvent extends TaskEvent {
-  final int id;
-  DeleteTaskEvent({required this.id});
+  final Task task;
+  const DeleteTaskEvent({required this.task});
 }

@@ -8,10 +8,12 @@ class DisplayListOfTasks extends StatelessWidget {
   final List<Task> tasks;
   final Widget Function(Task) itemBuilder;
   final Widget? divider;
+  final void Function(Task)? onTapItem;
 
   const DisplayListOfTasks({
     super.key,
     this.isCompletedTasks = false,
+    this.onTapItem,
     required this.itemBuilder,
     this.divider,
     required this.tasks,
@@ -52,12 +54,15 @@ class DisplayListOfTasks extends StatelessWidget {
 
                 return InkWell(
                     onLongPress: () async {},
-                    onTap: () async {},
+                    onTap: () async {
+                      // onTapItem!(task);
+                    },
                     child: itemBuilder(task));
               },
               separatorBuilder: (context, index) =>
                   divider ??
-                  const Divider(
+                  Divider(
+                    key: UniqueKey(),
                     color: Colors.transparent,
                     height: 15,
                   ),
