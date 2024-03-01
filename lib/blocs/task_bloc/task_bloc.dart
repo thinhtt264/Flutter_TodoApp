@@ -17,14 +17,23 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
   final DatabaseService db = DatabaseService();
 
-  void _addTask(AddTaskEvent event, Emitter<TaskState> emit) {
-    db.addTask(event.task);
-    List<Task> temp = List.of(state.tasks);
-    temp.insert(0, event.task);
+  Future<void> _addTask(AddTaskEvent event, Emitter<TaskState> emit) async {
+    emit(state.copyWith(status: TaskStatus.loading));
 
-    emit(state.copyWith(
-      tasks: temp,
-    ));
+    try {
+      final result = await db.addTask(event.task);
+      if (result == -1) throw Exception('');
+
+      List<Task> temp = List.of(state.tasks);
+      temp.insert(0, event.task);
+
+      emit(state.copyWith(
+        tasks: temp,
+      ));
+      emit(state.copyWith(status: TaskStatus.success));
+    } catch (e) {
+      emit(state.copyWith(status: TaskStatus.error));
+    }
   }
 
   void _deleteTask(DeleteTaskEvent event, Emitter<TaskState> emit) {
@@ -53,12 +62,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   Future<void> _getAllTasks(
       GetAllTasksEvent event, Emitter<TaskState> emit) async {
+    if (state.status == TaskStatus.success) return;
     final tasks = await db.getAllTasks();
-
-    if (tasks.length == state.tasks.length) {
-      return;
-    } else {
-      emit(state.copyWith(tasks: tasks));
-    }
+    emit(state.copyWith(tasks: tasks, status: TaskStatus.success));
   }
 }

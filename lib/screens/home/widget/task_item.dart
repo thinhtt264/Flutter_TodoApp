@@ -18,8 +18,8 @@ class CustomTaskItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      color: Theme.of(context).colorScheme.primary,
-      elevation: 1,
+      color: Colors.purpleAccent.shade200,
+      elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Slidable(
           startActionPane: ActionPane(

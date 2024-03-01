@@ -3,8 +3,6 @@ part of 'task_bloc.dart';
 @immutable
 abstract class TaskEvent {
   const TaskEvent();
-  @override
-  List<Object?> get props => [];
 }
 
 class GetAllTasksEvent extends TaskEvent {}

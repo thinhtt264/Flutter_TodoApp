@@ -52,12 +52,7 @@ class DisplayListOfTasks extends StatelessWidget {
                 }
                 final task = tasks[index];
 
-                return InkWell(
-                    onLongPress: () async {},
-                    onTap: () async {
-                      // onTapItem!(task);
-                    },
-                    child: itemBuilder(task));
+                return itemBuilder(task);
               },
               separatorBuilder: (context, index) =>
                   divider ??

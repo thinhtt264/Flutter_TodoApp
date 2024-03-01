@@ -22,19 +22,31 @@ class DatabaseService {
   }
 
   Future<int> addTask(Task task) async {
-    final db = await _databaseService.database;
-    return await db.insert(table, task.toMap());
+    try {
+      final db = await _databaseService.database;
+      return await db.insert(table, task.toMap());
+    } catch (e) {
+      return -1;
+    }
   }
 
   Future<int> deleteTask(Task task) async {
-    final db = await _databaseService.database;
-    return await db.delete(table, where: 'id = ?', whereArgs: [task.id]);
+    try {
+      final db = await _databaseService.database;
+      return await db.delete(table, where: 'id = ?', whereArgs: [task.id]);
+    } catch (e) {
+      return -1;
+    }
   }
 
   Future<int> updateTask(Task task) async {
-    final db = await _databaseService.database;
-    return await db
-        .update(table, task.toMap(), where: 'id = ?', whereArgs: [task.id]);
+    try {
+      final db = await _databaseService.database;
+      return await db
+          .update(table, task.toMap(), where: 'id = ?', whereArgs: [task.id]);
+    } catch (e) {
+      return -1;
+    }
   }
 
   Future<List<Task>> getAllTasks() async {

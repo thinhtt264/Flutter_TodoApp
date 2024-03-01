@@ -1,7 +1,7 @@
 # flutter_ToDoApp
 
 A TodoApp Flutter project.
-Using Bloc to State Management
+Using Bloc + Sqflite
 
 ## Getting Started
 
