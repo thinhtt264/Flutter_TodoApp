@@ -18,7 +18,7 @@ class CustomTaskItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 10),
-      color: Colors.purpleAccent.shade200,
+      color: Colors.purpleAccent.shade100,
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Slidable(
@@ -46,7 +46,10 @@ class CustomTaskItem extends StatelessWidget {
             ],
           ),
           child: ListTile(
-            title: Text(task.title ?? ''),
+            title: Text(
+              task.title ?? '',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             subtitle: Text(task.description ?? ''),
             trailing: Checkbox(
               value: task.isCompleted ?? false,

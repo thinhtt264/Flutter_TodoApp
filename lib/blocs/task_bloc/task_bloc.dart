@@ -30,6 +30,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       emit(state.copyWith(
         tasks: temp,
       ));
+      event.callback?.call(null);
       emit(state.copyWith(status: TaskStatus.success));
     } catch (e) {
       emit(state.copyWith(status: TaskStatus.error));

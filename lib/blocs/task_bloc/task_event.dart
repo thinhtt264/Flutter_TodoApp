@@ -2,14 +2,17 @@ part of 'task_bloc.dart';
 
 @immutable
 abstract class TaskEvent {
-  const TaskEvent();
+  final Function(dynamic)? callback;
+  const TaskEvent({this.callback});
 }
 
 class GetAllTasksEvent extends TaskEvent {}
 
 class AddTaskEvent extends TaskEvent {
   final Task task;
-  const AddTaskEvent({required this.task});
+
+  const AddTaskEvent({required this.task, Function(dynamic)? callback})
+      : super(callback: callback);
 }
 
 class UpdateTaskEvent extends TaskEvent {

@@ -4,6 +4,7 @@ import 'package:flutter_application_1/blocs/app_bloc/app_bloc.dart';
 import 'package:flutter_application_1/blocs/task_bloc/task_bloc.dart';
 import 'package:flutter_application_1/data/data.dart';
 import 'package:flutter_application_1/screens/task/widget/widget.dart';
+import 'package:flutter_application_1/utils/utils.dart';
 import 'package:flutter_application_1/widget/custom_button.dart';
 import 'package:flutter_application_1/widget/widgets.dart';
 import 'package:bottom_picker/bottom_picker.dart';
@@ -62,7 +63,7 @@ class _AddTaskState extends State<AddTaskScreen> {
         buttonPadding: 10,
         onSubmit: (index) {
           setState(() {
-            _date = index;
+            _time = index;
           });
         },
         dismissable: true,
@@ -119,14 +120,23 @@ class _AddTaskState extends State<AddTaskScreen> {
       return;
     }
     context.read<TaskBloc>().add(AddTaskEvent(
-            task: Task(
-          id: DateTime.now().millisecondsSinceEpoch.toInt(),
-          title: _title,
-          description: _description,
-          date: '2022-01-01',
-          time: '10:00',
-          isCompleted: false,
-        )));
+          task: Task(
+            id: DateTime.now().millisecondsSinceEpoch.toInt(),
+            title: _title,
+            description: _description,
+            date: formatDate(_date),
+            time: formatTime(_time),
+            isCompleted: false,
+          ),
+          callback: (p0) {
+            context.read<AppBloc>().add(const OpenDialogEvent(
+                dialogProps: AlertDialogProps(
+                    title: "Success",
+                    content: "Task added successfully",
+                    type: AlertDialogType.noti)));
+            Navigator.of(context).pop();
+          },
+        ));
   }
 
   @override
